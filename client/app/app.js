@@ -1,7 +1,7 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
+import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
@@ -27,7 +27,7 @@ import socket from '../components/socket/socket.service';
 import './app.css';
 
 angular.module('jeeonApp', [
-    // ngAnimate,
+    ngAnimate,
     ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar,
     // ngMessages,
     navbar, footer, main, constants, socket, util
