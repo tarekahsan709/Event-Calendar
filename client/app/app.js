@@ -9,6 +9,7 @@ import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
+import mwl_calendar from '../../node_modules/angular-bootstrap-calendar';
 // import ngMessages from 'angular-messages';
 
 
@@ -27,7 +28,7 @@ import './app.css';
 
 angular.module('jeeonApp', [
     // ngAnimate,
-    ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap,
+    ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar,
     // ngMessages,
     navbar, footer, main, constants, socket, util
   ])
