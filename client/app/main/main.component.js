@@ -5,24 +5,24 @@ import routing from './main.routes';
 export class MainController {
     $http;
     socket;
-    awesomeThings = [];
-    newThing = '';
+    moment;
+    calendarConfig;
+    $uibModal;
 
     /*@ngInject*/
-    constructor($http, $scope, socket, moment, calendarConfig) {
+    constructor($http, socket, moment, calendarConfig, $uibModal) {
+
         this.$http = $http;
+        this.$uibModal = $uibModal;
         this.moment = moment;
         this.calendarConfig = calendarConfig;
         this.socket = socket;
-        $scope.$on('$destroy', function () {
-            socket.unsyncUpdates('thing');
-        });
     }
 
     $onInit() {
+        this.items = ['item1', 'item2', 'item3'];
+        this.animationsEnabled = true;
         //These variables MUST be set as a minimum for the calendar to work
-        this.calendarView = 'month';
-        this.viewDate = new Date();
         var actions = [{
             label: '<i class=\'glyphicon glyphicon-pencil\'>edif</i>',
             onClick: function (args) {
@@ -64,24 +64,14 @@ export class MainController {
                 actions: actions
             }
         ];
+        this.calendarView = 'month';
+        this.viewDate = new Date();
         this.cellIsOpen = true;
     }
 
-    addThing() {
-        if (this.newThing) {
-            this.$http.post('/api/things', {
-                name: this.newThing
-            });
-            this.newThing = '';
-        }
-    }
-
-    deleteThing(thing) {
-        this.$http.delete('/api/things/' + thing._id);
-    }
 
     addEvent() {
-        this.events.push({
+        this.$rootScope.events.push({
             title: 'New event',
             startsAt: this.moment().startOf('day').toDate(),
             endsAt: this.moment().endOf('day').toDate(),
@@ -141,6 +131,66 @@ export class MainController {
         }
 
     };
+
+    addNewEvent (size) {
+        var modalInstance = this.$uibModal.open({
+            animation: this.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'myModalContent.html',
+            controller:['$rootScope','$scope','$uibModalInstance', 'items', 'moment', function ($rootScope, $scope, $uibModalInstance, items, moment) {
+
+                $scope.items = items;
+                
+                $scope.selected = {
+                    item: $scope.items[0]
+                };
+
+                $scope.today = function() {
+                    $scope.dt = new Date();
+                };
+                $scope.today();
+
+                $scope.open1 = function() {
+                    $scope.popup1.opened = true;
+                };
+
+                $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+                $scope.format = $scope.formats[0];
+                $scope.altInputFormats = ['M!/d!/yyyy'];
+
+                $scope.popup1 = {
+                    opened: false
+                };
+                
+                $scope.ok = function () {
+                    this.$rootScope.events.push({
+                        title: 'New $rootScope',
+                        startsAt: moment().startOf('day').toDate(),
+                        endsAt: moment().endOf('day').toDate(),
+                        draggable: true,
+                        resizable: true
+                    });
+
+                    $uibModalInstance.close($scope.selected.item);
+
+
+                };
+
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+
+
+            }],
+            size: size,
+            resolve: {
+                items: function () {
+                    return this.items;
+                }.bind(this)
+            }
+        });
+    }
 
 }
 
