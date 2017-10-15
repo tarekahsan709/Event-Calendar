@@ -1,8 +1,8 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import routing from './main.routes';
+import routing from './event.routes';
 
-export class MainController {
+export class EventController {
     $http;
     socket;
     moment;
@@ -134,6 +134,7 @@ export class MainController {
             } else {
                 this.cellIsOpen = true;
                 this.viewDate = date;
+                console.log(date);
             }
         } else if (this.calendarView === 'year') {
             if ((this.cellIsOpen && this.moment(date).startOf('month').isSame(this.moment(this.viewDate).startOf('month'))) || cell.events.length === 0) {
@@ -297,10 +298,10 @@ export class MainController {
 
 }
 
-export default angular.module('jeeonApp.main', [uiRouter])
+export default angular.module('jeeonApp.event', [uiRouter])
     .config(routing)
-    .component('main', {
-        template: require('./main.html'),
-        controller: MainController
+    .component('event', {
+        template: require('./event.html'),
+        controller: EventController
     })
     .name;

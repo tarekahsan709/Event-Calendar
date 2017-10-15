@@ -2,6 +2,6 @@
 
 import angular from 'angular';
 
-export default angular.module('generalCrmApp.constants', [])
+export default angular.module('jeeonApp.constants', [])
   .constant('appConfig', require('../../server/config/environment/shared'))
   .name;

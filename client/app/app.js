@@ -21,17 +21,17 @@ import {
 import _Auth from '../components/auth/auth.module';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
-import main from './main/main.component';
+import event from './event/event.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
-import eventService from './main/event.service';
+import eventService from './event/event.service';
 
 
 import './app.css';
 
 angular.module('jeeonApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar, eventService,
-  _Auth, navbar, footer, main, constants, socket, util
+  _Auth, navbar, footer, event, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
@@ -41,7 +41,7 @@ angular.module('jeeonApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function(loggedIn) {
         if(next.authenticate && !loggedIn) {
-          $location.path('/login');
+          $location.path('/main');
         }
       });
     });
