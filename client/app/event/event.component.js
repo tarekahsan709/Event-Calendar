@@ -171,7 +171,7 @@ export class EventController {
                 };
 
                 $scope.open2 = function () {
-                    $scope.endDateOptions.minDate = $scope.dtOne;
+                    $scope.dateOptions.minDate = $scope.dtOne;
                     $scope.popup2.opened = true;
                 };
 

@@ -18,7 +18,6 @@ import {
   routeConfig
 } from './app.config';
 
-import _Auth from '../components/auth/auth.module';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import event from './event/event.component';
@@ -30,20 +29,15 @@ import eventService from './event/event.service';
 
 import './app.css';
 
-angular.module('jeeonApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar, eventService,
-  _Auth, navbar, footer, event, constants, socket, util
+angular.module('jeeonApp', [ngCookies, ngResource, ngSanitize, ngAnimate, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar, eventService,
+   navbar, footer, event, constants, socket, util
 ])
   .config(routeConfig)
-  .run(function($rootScope, $location, Auth) {
+  .run(function($rootScope) {
     'ngInject';
-    // Redirect to login if route requires auth and you're not logged in
 
     $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedIn(function(loggedIn) {
-        if(next.authenticate && !loggedIn) {
-          $location.path('/main');
-        }
-      });
+    
     });
   });
 
