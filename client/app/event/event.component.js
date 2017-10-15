@@ -10,6 +10,18 @@ export class EventController {
     $uibModal;
     eventService;
     events;
+    actions = [{
+        label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
+        onClick: event => {
+            this.editEvent(event.calendarEvent);
+        }
+    }, {
+        label: '<i class=\'glyphicon glyphicon-remove\' style="color: #ff0024">Remove</i>',
+        onClick: function (event) {
+            event.calendarEvent.$remove();
+            this.events.splice(this.events.indexOf(event.calendarEvent), 1);
+        }.bind(this)
+    }];
 
     // dealer.$remove();
     // this.dealers.splice(this.dealers.indexOf(dealer), 1);
@@ -21,51 +33,22 @@ export class EventController {
         this.moment = moment;
         this.calendarConfig = calendarConfig;
         this.socket = socket;
-        this.events = eventService.query();
-
-        let actions = [{
-            label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
-            onClick: event => {
-                this.editEvent(event.calendarEvent);
-            }
-        }, {
-            label: '<i class=\'glyphicon glyphicon-remove\' style="color: #ff0024">Remove</i>',
-            onClick: function (event) {
-                event.calendarEvent.$remove();
-                this.events.splice(this.events.indexOf(event.calendarEvent), 1);
-            }.bind(this)
-        }];
-
-        this.events.$promise.then(function (events) {
-            return events.map(function (event) {
-                event.startsAt = new Date(event.startsAt);
-                event.endsAt = new Date(event.endsAt);
-                event.actions = actions;
-                return event;
-            });
-
-        }).catch(function (err) {
-            console.log(err);
-        });
+        this.eventService = eventService;
 
         $scope.$on('addEvent', (event, data) => {
             data.startsAt = new Date(data.startsAt);
             data.endsAt = new Date(data.endsAt);
-            data.actions = actions;
+            data.actions = this.actions;
             this.events.push(data);
         });
 
         $scope.$on('editEvent', (event, data) => {
-
-            console.log('Updated Data');
-            console.log(data);
-            
             this.events = eventService.query();
-            this.events.$promise.then(function (events) {
-                return events.map(function (event) {
+            this.events.$promise.then( events => {
+                return events.map( event => {
                     event.startsAt = new Date(event.startsAt);
                     event.endsAt = new Date(event.endsAt);
-                    event.actions = actions;
+                    event.actions = this.actions;
                     return event;
                 });
 
@@ -78,6 +61,20 @@ export class EventController {
 
 
     $onInit() {
+        this.events = this.eventService.query();
+
+        this.events.$promise.then(events => {
+            return events.map(event => {
+                event.startsAt = new Date(event.startsAt);
+                event.endsAt = new Date(event.endsAt);
+                event.actions = this.actions;
+                return event;
+            });
+
+        }).catch(err => {
+            console.log(err);
+        });
+
         this.items = ['item1', 'item2', 'item3'];
         this.animationsEnabled = true;
         this.calendarView = 'month';
@@ -162,16 +159,23 @@ export class EventController {
                 $scope.dtTwo = new Date();
 
                 $scope.endDateOptions = {
-                    maxDate: new Date(2025, 5, 22)
+                    maxDate: new Date(2025, 5, 22),
+                    minDate: $scope.dtOne
                 };
 
 
+                $scope.$watch("dtOne", function (newValue, oldValue) {
+                    $scope.endDateOptions.minDate = newValue;
+                    if( $scope.dtOne >  $scope.dtTwo){
+                        $scope.dtTwo = newValue;
+
+                    }
+                });
                 $scope.open1 = function () {
                     $scope.popup1.opened = true;
                 };
 
                 $scope.open2 = function () {
-                    $scope.dateOptions.minDate = $scope.dtOne;
                     $scope.popup2.opened = true;
                 };
 
@@ -247,7 +251,18 @@ export class EventController {
                 $scope.format = $scope.formats[0];
                 $scope.altInputFormats = ['M!/d!/yyyy'];
 
+                $scope.endDateOptions = {
+                    maxDate: new Date(2025, 5, 22),
+                    minDate: $scope.dtOne
+                };
 
+                $scope.$watch("dtOne", function (newValue, oldValue) {
+                    $scope.endDateOptions.minDate = newValue;
+                    if( $scope.dtOne >  $scope.dtTwo){
+                        $scope.dtTwo = newValue;
+
+                    }
+                });
 
                 $scope.open1 = function () {
                     $scope.popup1.opened = true;
