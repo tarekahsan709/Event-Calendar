@@ -44,8 +44,8 @@ export class EventController {
 
         $scope.$on('editEvent', (event, data) => {
             this.events = eventService.query();
-            this.events.$promise.then( events => {
-                return events.map( event => {
+            this.events.$promise.then(events => {
+                return events.map(event => {
                     event.startsAt = new Date(event.startsAt);
                     event.endsAt = new Date(event.endsAt);
                     event.actions = this.actions;
@@ -56,6 +56,7 @@ export class EventController {
                 console.log(err);
             });
         });
+
 
     }
 
@@ -166,7 +167,7 @@ export class EventController {
 
                 $scope.$watch("dtOne", function (newValue, oldValue) {
                     $scope.endDateOptions.minDate = newValue;
-                    if( $scope.dtOne >  $scope.dtTwo){
+                    if ($scope.dtOne > $scope.dtTwo) {
                         $scope.dtTwo = newValue;
 
                     }
@@ -258,7 +259,7 @@ export class EventController {
 
                 $scope.$watch("dtOne", function (newValue, oldValue) {
                     $scope.endDateOptions.minDate = newValue;
-                    if( $scope.dtOne >  $scope.dtTwo){
+                    if ($scope.dtOne > $scope.dtTwo) {
                         $scope.dtTwo = newValue;
 
                     }
