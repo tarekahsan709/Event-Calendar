@@ -161,12 +161,17 @@ export class EventController {
                 $scope.dtOne = new Date();
                 $scope.dtTwo = new Date();
 
+                $scope.endDateOptions = {
+                    maxDate: new Date(2025, 5, 22)
+                };
+
 
                 $scope.open1 = function () {
                     $scope.popup1.opened = true;
                 };
 
                 $scope.open2 = function () {
+                    $scope.endDateOptions.minDate = $scope.dtOne;
                     $scope.popup2.opened = true;
                 };
 
@@ -241,6 +246,7 @@ export class EventController {
                 $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
                 $scope.format = $scope.formats[0];
                 $scope.altInputFormats = ['M!/d!/yyyy'];
+
 
 
                 $scope.open1 = function () {
