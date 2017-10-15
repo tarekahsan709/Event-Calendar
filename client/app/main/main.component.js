@@ -11,6 +11,8 @@ export class MainController {
     eventService;
     events;
 
+    // dealer.$remove();
+    // this.dealers.splice(this.dealers.indexOf(dealer), 1);
 
     /*@ngInject*/
     constructor($scope, $http, socket, moment, calendarConfig, $uibModal, eventService) {
@@ -29,10 +31,10 @@ export class MainController {
             }
         }, {
             label: '<i class=\'glyphicon glyphicon-remove\'>Remove</i>',
-            onClick: function (args) {
-                alert('actions 2');
-                alert.show('Deleted', args.calendarEvent);
-            }
+            onClick: function (event) {
+                event.calendarEvent.$remove();
+                this.events.splice(this.events.indexOf(event.calendarEvent), 1);
+            }.bind(this)
         }];
 
         this.events.$promise.then(function (events) {
