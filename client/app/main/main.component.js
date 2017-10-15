@@ -25,9 +25,9 @@ export class MainController {
 
         let actions = [{
             label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
-            onClick: function (args) {
-                alert('actions 1');
-                alert.show('Edited', args.calendarEvent);
+            onClick: event => {
+                this.editEvent(event.calendarEvent);
+                // alert.show('Edited', event.calendarEvent);
             }
         }, {
             label: '<i class=\'glyphicon glyphicon-remove\'>Remove</i>',
@@ -49,13 +49,30 @@ export class MainController {
             console.log(err);
         });
 
-        $scope.$on('addEvent', (event, data) =>{
+        $scope.$on('addEvent', (event, data) => {
             data.startsAt = new Date(data.startsAt);
             data.endsAt = new Date(data.endsAt);
             data.actions = actions;
-
             this.events.push(data);
+        });
 
+        $scope.$on('editEvent', (event, data) => {
+
+            console.log('Updated Data');
+            console.log(data);
+            
+            this.events = eventService.query();
+            this.events.$promise.then(function (events) {
+                return events.map(function (event) {
+                    event.startsAt = new Date(event.startsAt);
+                    event.endsAt = new Date(event.endsAt);
+                    event.actions = actions;
+                    return event;
+                });
+
+            }).catch(function (err) {
+                console.log(err);
+            });
         });
 
     }
@@ -129,7 +146,6 @@ export class MainController {
 
     };
 
-
     addNewEvent(size) {
         var modalInstance = this.$uibModal.open({
             animation: this.animationsEnabled,
@@ -175,7 +191,7 @@ export class MainController {
                     event.$save()
                         .then(function (res) {
                             console.log(res);
-                            $rootScope.$broadcast('addEvent',res);
+                            $rootScope.$broadcast('addEvent', res);
 
                         })
                         .catch(function (req) {
@@ -202,6 +218,80 @@ export class MainController {
                     return this.items;
                 }.bind(this)
             }
+        });
+    }
+
+
+    editEvent(event) {
+
+        var modalInstance = this.$uibModal.open({
+            animation: this.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'editContent.html',
+            controller: ['$rootScope', '$scope', '$uibModalInstance', 'moment', 'eventService', function ($rootScope, $scope, $uibModalInstance, moment, eventService) {
+
+                console.log('Edit event inside modal');
+                console.log(event._id);
+                $scope.dtOne = new Date(event.startsAt);
+                $scope.dtTwo = new Date(event.endsAt);
+                $scope.title = event.title;
+
+
+                $scope.event = new eventService();
+
+                $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+                $scope.format = $scope.formats[0];
+                $scope.altInputFormats = ['M!/d!/yyyy'];
+
+
+                $scope.open1 = function () {
+                    $scope.popup1.opened = true;
+                };
+
+                $scope.open2 = function () {
+                    $scope.popup2.opened = true;
+                };
+
+
+                $scope.popup1 = {
+                    opened: false
+                };
+
+                $scope.popup2 = {
+                    opened: false
+                };
+
+                $scope.ok = function () {
+
+                    var eventData = {
+                        title: $scope.title,
+                        startsAt: $scope.dtOne,
+                        endsAt: $scope.dtTwo
+                    };
+
+                    eventService.update({
+                        id: event._id
+                    }, eventData, response => {
+                        if (response.$resolved) {
+                            console.log('update Event');
+                            console.log(response);
+                            $rootScope.$broadcast('editEvent', response);
+                            $uibModalInstance.close();
+
+                        }
+                    });
+
+
+                };
+
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+
+
+            }],
+            event: event
         });
     }
 
