@@ -80,7 +80,7 @@ describe('Event API:', function () {
         });
 
         it('should respond with the requested event', function () {
-            expect(event.title).to.equal('New Thing');
+            expect(event.title).to.equal('New Event');
             expect(event.startsAt).to.equal(new Date());
             expect(event.endsAt).to.equal(new Date());
         });
@@ -113,7 +113,7 @@ describe('Event API:', function () {
         });
 
         it('should respond with the updated event', function () {
-            expect(updatedEvent.title).to.equal('Updated Thing');
+            expect(updatedEvent.title).to.equal('Updated Event');
             expect(updatedEvent.startsAt).to.equal(new Date());
             expect(updatedEvent.endsAt).to.equal(new Date());
         });
@@ -165,7 +165,7 @@ describe('Event API:', function () {
         });
 
         it('should respond with the patched event', function () {
-            expect(patchedEvent.title).to.equal('Patched Thing');
+            expect(patchedEvent.title).to.equal('Patched Event');
             expect(patchedEvent.startsAt).to.equal(new Date());
             expect(patchedEvent.endsAt).to.equal(new Date());
         });
@@ -184,7 +184,7 @@ describe('Event API:', function () {
                 });
         });
 
-        it('should respond with 404 when thing does not exist', function (done) {
+        it('should respond with 404 when event does not exist', function (done) {
             request(app)
                 .delete(`/api/events/${newEvent._id}`)
                 .expect(404)
