@@ -1,8 +1,6 @@
 <div class="container">
-    <h3>Today-{{$ctrl.calendarTitle }}</h3>
-
     <div class="row">
-        <div class="col-md-3 pull-left">
+        <div class="">
             <button
                     class="btn btn-primary pull-right"
                     ng-click="$ctrl.addNewEvent()">
@@ -10,7 +8,7 @@
             </button>
         </div>
 
-        <div class="col-md-6">
+        <div class="">
             <div class="btn-group">
 
                 <button
@@ -53,14 +51,42 @@
                 cell-is-open="$ctrl.cellIsOpen"
                 day-view-split="30"
                 cell-modifier="$ctrl.modifyCell(calendarCell)"
-                cell-auto-open-disabled="true"
+                cell-auto-open-disabled="false"
                 on-view-change-click="false"
+                custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
                 on-timespan-click="$ctrl.timespanClicked(calendarDate, calendarCell)">
         </mwl-calendar>
 
     </div>
 
 </div>
+
+
+<script id="customMonthCell.html" type="text/ng-template">
+    <div class="cal-month-day {{day.cssClass}}">
+
+    <span
+            class="pull-right"
+            data-cal-date
+            ng-click="vm.calendarCtrl.dateClicked(day.date)"
+            ng-bind="day.label">
+    </span>
+
+
+        <ul ng-repeat="event in day.events | limitTo : 2" style="padding-left: 2px; margin-bottom: 0px">
+
+            <li  class="label label-success">{{event.title}}</li>
+
+        </ul>
+
+        <small ng-show="day.events.length > 1" style="position: absolute; bottom: 10px; left: 5px">
+            There are {{ day.events.length }} events on this day, Click to more
+        </small>
+
+    </div>
+</script>
+
+
 
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">

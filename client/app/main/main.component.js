@@ -83,7 +83,7 @@ export class MainController {
         this.animationsEnabled = true;
         this.calendarView = 'month';
         this.viewDate = new Date();
-        this.cellIsOpen = true;
+        this.cellIsOpen = false;
     }
 
     addEvent() {
