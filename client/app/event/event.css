@@ -44,3 +44,7 @@
 .mwl-calendar span[data-cal-date] {
     margin-top: 30px !important;
 }
+
+.uib-clear{
+    display: none !important;
+}

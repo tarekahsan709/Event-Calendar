@@ -27,10 +27,9 @@ export class EventController {
             label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
             onClick: event => {
                 this.editEvent(event.calendarEvent);
-                // alert.show('Edited', event.calendarEvent);
             }
         }, {
-            label: '<i class=\'glyphicon glyphicon-remove\'>Remove</i>',
+            label: '<i class=\'glyphicon glyphicon-remove\' style="color: #ff0024">Remove</i>',
             onClick: function (event) {
                 event.calendarEvent.$remove();
                 this.events.splice(this.events.indexOf(event.calendarEvent), 1);
@@ -134,7 +133,6 @@ export class EventController {
             } else {
                 this.cellIsOpen = true;
                 this.viewDate = date;
-                console.log(date);
             }
         } else if (this.calendarView === 'year') {
             if ((this.cellIsOpen && this.moment(date).startOf('month').isSame(this.moment(this.viewDate).startOf('month'))) || cell.events.length === 0) {
@@ -191,7 +189,6 @@ export class EventController {
 
                     event.$save()
                         .then(function (res) {
-                            console.log(res);
                             $rootScope.$broadcast('addEvent', res);
 
                         })
