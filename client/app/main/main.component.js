@@ -59,38 +59,6 @@ export class MainController {
     $onInit() {
         this.items = ['item1', 'item2', 'item3'];
         this.animationsEnabled = true;
-        //These variables MUST be set as a minimum for the calendar to work
-        // var actions = [{
-        //     label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
-        //     onClick: function (args) {
-        //         alert('actions 1');
-        //         alert.show('Edited', args.calendarEvent);
-        //     }
-        // }, {
-        //     label: '<i class=\'glyphicon glyphicon-remove\'>Remove</i>',
-        //     onClick: function (args) {
-        //         alert('actions 2');
-        //         alert.show('Deleted', args.calendarEvent);
-        //     }
-        // }];
-        // this.events = [
-        //     {
-        //         title: 'An event',
-        //         startsAt: this.moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-        //         endsAt: this.moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-        //         actions: actions
-        //     }, {
-        //         title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-        //         startsAt: this.moment().subtract(1, 'day').toDate(),
-        //         endsAt: this.moment().add(5, 'days').toDate(),
-        //         actions: actions
-        //     }, {
-        //         title: 'This is a really long event title that occurs on every year',
-        //         startsAt: this.moment().startOf('day').add(7, 'hours').toDate(),
-        //         endsAt: this.moment().startOf('day').add(19, 'hours').toDate(),
-        //         actions: actions
-        //     }
-        // ];
         this.calendarView = 'month';
         this.viewDate = new Date();
         this.cellIsOpen = true;
@@ -156,6 +124,7 @@ export class MainController {
         }
 
     };
+    
 
     addNewEvent(size) {
         var modalInstance = this.$uibModal.open({

@@ -54,6 +54,7 @@
                 day-view-split="30"
                 cell-modifier="$ctrl.modifyCell(calendarCell)"
                 cell-auto-open-disabled="true"
+                on-view-change-click="false"
                 on-timespan-click="$ctrl.timespanClicked(calendarDate, calendarCell)">
         </mwl-calendar>
 
@@ -182,7 +183,7 @@
                                uib-datepicker-popup="{{format}}" ng-model="dt"
                                is-open="popup1.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close"
-                               alt-input-formats="altInputFormats" />
+                               alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
@@ -194,7 +195,7 @@
                                uib-datepicker-popup="{{format}}" ng-model="dt"
                                is-open="popup1.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close"
-                               alt-input-formats="altInputFormats" />
+                               alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
@@ -219,6 +220,7 @@
         border-radius: 32px;
         color: black;
     }
+
     .partially button span {
         background-color: orange;
         border-radius: 32px;
