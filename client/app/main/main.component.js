@@ -13,32 +13,29 @@ export class MainController {
 
 
     /*@ngInject*/
-    constructor($http, socket, moment, calendarConfig, $uibModal, eventService) {
+    constructor($scope, $http, socket, moment, calendarConfig, $uibModal, eventService) {
         this.$http = $http;
         this.$uibModal = $uibModal;
         this.moment = moment;
         this.calendarConfig = calendarConfig;
         this.socket = socket;
-
         this.events = eventService.query();
 
+        let actions = [{
+            label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
+            onClick: function (args) {
+                alert('actions 1');
+                alert.show('Edited', args.calendarEvent);
+            }
+        }, {
+            label: '<i class=\'glyphicon glyphicon-remove\'>Remove</i>',
+            onClick: function (args) {
+                alert('actions 2');
+                alert.show('Deleted', args.calendarEvent);
+            }
+        }];
+
         this.events.$promise.then(function (events) {
-
-            let actions = [{
-                label: '<i class=\'glyphicon glyphicon-pencil\'>Edit</i>',
-                onClick: function (args) {
-                    alert('actions 1');
-                    alert.show('Edited', args.calendarEvent);
-                }
-            }, {
-                label: '<i class=\'glyphicon glyphicon-remove\'>Remove</i>',
-                onClick: function (args) {
-                    alert('actions 2');
-                    alert.show('Deleted', args.calendarEvent);
-                }
-            }];
-
-
             return events.map(function (event) {
                 event.startsAt = new Date(event.startsAt);
                 event.endsAt = new Date(event.endsAt);
@@ -46,13 +43,21 @@ export class MainController {
                 return event;
             });
 
-
         }).catch(function (err) {
             console.log(err);
         });
 
+        $scope.$on('addEvent', (event, data) =>{
+            data.startsAt = new Date(data.startsAt);
+            data.endsAt = new Date(data.endsAt);
+            data.actions = actions;
+
+            this.events.push(data);
+
+        });
 
     }
+
 
     $onInit() {
         this.items = ['item1', 'item2', 'item3'];
@@ -61,7 +66,6 @@ export class MainController {
         this.viewDate = new Date();
         this.cellIsOpen = true;
     }
-
 
     addEvent() {
         this.$rootScope.events.push({
@@ -168,8 +172,9 @@ export class MainController {
 
                     event.$save()
                         .then(function (res) {
-                            console.log("authenticated");
-                            console.log(res)
+                            console.log(res);
+                            $rootScope.$broadcast('addEvent',res);
+
                         })
                         .catch(function (req) {
                             console.log("error saving obj");
