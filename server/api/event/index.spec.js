@@ -4,13 +4,13 @@
 
 var proxyquire = require('proxyquire').noPreserveCache();
 
-var thingCtrlStub = {
-  index: 'thingCtrl.index',
-  show: 'thingCtrl.show',
-  create: 'thingCtrl.create',
-  upsert: 'thingCtrl.upsert',
-  patch: 'thingCtrl.patch',
-  destroy: 'thingCtrl.destroy'
+var eventCtrlStub = {
+  index: 'eventCtrl.index',
+  show: 'eventCtrl.show',
+  create: 'eventCtrl.create',
+  upsert: 'eventCtrl.upsert',
+  patch: 'eventCtrl.patch',
+  destroy: 'eventCtrl.destroy'
 };
 
 var routerStub = {
@@ -22,64 +22,64 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var thingIndex = proxyquire('./index.js', {
+var eventIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;
     }
   },
-  './thing.controller': thingCtrlStub
+  './event.controller': eventCtrlStub
 });
 
-describe('Thing API Router:', function() {
+describe('Event API Router:', function() {
   it('should return an express router instance', function() {
-    expect(thingIndex).to.equal(routerStub);
+    expect(eventIndex).to.equal(routerStub);
   });
 
-  describe('GET /api/things', function() {
-    it('should route to thing.controller.index', function() {
+  describe('GET /api/events', function() {
+    it('should route to event.controller.index', function() {
       expect(routerStub.get
-        .withArgs('/', 'thingCtrl.index')
+        .withArgs('/', 'eventCtrl.index')
         ).to.have.been.calledOnce;
     });
   });
 
-  describe('GET /api/things/:id', function() {
-    it('should route to thing.controller.show', function() {
+  describe('GET /api/events/:id', function() {
+    it('should route to event.controller.show', function() {
       expect(routerStub.get
-        .withArgs('/:id', 'thingCtrl.show')
+        .withArgs('/:id', 'eventCtrl.show')
         ).to.have.been.calledOnce;
     });
   });
 
-  describe('POST /api/things', function() {
-    it('should route to thing.controller.create', function() {
+  describe('POST /api/events', function() {
+    it('should route to event.controller.create', function() {
       expect(routerStub.post
-        .withArgs('/', 'thingCtrl.create')
+        .withArgs('/', 'eventCtrl.create')
         ).to.have.been.calledOnce;
     });
   });
 
-  describe('PUT /api/things/:id', function() {
-    it('should route to thing.controller.upsert', function() {
+  describe('PUT /api/events/:id', function() {
+    it('should route to event.controller.upsert', function() {
       expect(routerStub.put
-        .withArgs('/:id', 'thingCtrl.upsert')
+        .withArgs('/:id', 'eventCtrl.upsert')
         ).to.have.been.calledOnce;
     });
   });
 
-  describe('PATCH /api/things/:id', function() {
-    it('should route to thing.controller.patch', function() {
+  describe('PATCH /api/events/:id', function() {
+    it('should route to event.controller.patch', function() {
       expect(routerStub.patch
-        .withArgs('/:id', 'thingCtrl.patch')
+        .withArgs('/:id', 'eventCtrl.patch')
         ).to.have.been.calledOnce;
     });
   });
 
-  describe('DELETE /api/things/:id', function() {
-    it('should route to thing.controller.destroy', function() {
+  describe('DELETE /api/events/:id', function() {
+    it('should route to event.controller.destroy', function() {
       expect(routerStub.delete
-        .withArgs('/:id', 'thingCtrl.destroy')
+        .withArgs('/:id', 'eventCtrl.destroy')
         ).to.have.been.calledOnce;
     });
   });
