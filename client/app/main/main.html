@@ -174,13 +174,13 @@
             <tbody>
             <tr>
                 <td>
-                    <input type="text" class="form-control" ng-model="event.title">
+                    <input type="text" class="form-control" ng-model="title">
                 </td>
 
                 <td>
                     <p class="input-group">
                         <input type="text" class="form-control"
-                               uib-datepicker-popup="{{format}}" ng-model="dt"
+                               uib-datepicker-popup="{{format}}" ng-model="dtOne"
                                is-open="popup1.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close"
                                alt-input-formats="altInputFormats"/>
@@ -192,12 +192,12 @@
                 <td>
                     <p class="input-group">
                         <input type="text" class="form-control"
-                               uib-datepicker-popup="{{format}}" ng-model="dt"
-                               is-open="popup1.opened" datepicker-options="dateOptions"
+                               uib-datepicker-popup="{{format}}" ng-model="dtTwo"
+                               is-open="popup2.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close"
                                alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                     </p>
                 </td>
@@ -209,21 +209,9 @@
 
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button ng-disabled="!title" class="btn btn-primary" type="button" ng-click="ok()">Add</button>
+
         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </script>
 
-<style>
-    .full button span {
-        background-color: limegreen;
-        border-radius: 32px;
-        color: black;
-    }
-
-    .partially button span {
-        background-color: orange;
-        border-radius: 32px;
-        color: black;
-    }
-</style>

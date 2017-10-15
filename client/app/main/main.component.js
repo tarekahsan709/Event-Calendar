@@ -51,8 +51,6 @@ export class MainController {
             console.log(err);
         });
 
-        // console.log(this.events);
-
 
     }
 
@@ -124,7 +122,7 @@ export class MainController {
         }
 
     };
-    
+
 
     addNewEvent(size) {
         var modalInstance = this.$uibModal.open({
@@ -132,41 +130,55 @@ export class MainController {
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'myModalContent.html',
-            controller: ['$rootScope', '$scope', '$uibModalInstance', 'items', 'moment', function ($rootScope, $scope, $uibModalInstance, items, moment) {
+            controller: ['$rootScope', '$scope', '$uibModalInstance', 'items', 'moment', 'eventService', function ($rootScope, $scope, $uibModalInstance, items, moment, eventService) {
 
-                $scope.items = items;
+                $scope.event = new eventService();
 
-                $scope.selected = {
-                    item: $scope.items[0]
-                };
+                $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+                $scope.format = $scope.formats[0];
+                $scope.altInputFormats = ['M!/d!/yyyy'];
+                $scope.dtOne = new Date();
+                $scope.dtTwo = new Date();
 
-                $scope.today = function () {
-                    $scope.dt = new Date();
-                };
-                $scope.today();
 
                 $scope.open1 = function () {
                     $scope.popup1.opened = true;
                 };
 
-                $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-                $scope.format = $scope.formats[0];
-                $scope.altInputFormats = ['M!/d!/yyyy'];
+                $scope.open2 = function () {
+                    $scope.popup2.opened = true;
+                };
+
 
                 $scope.popup1 = {
                     opened: false
                 };
 
+                $scope.popup2 = {
+                    opened: false
+                };
+
                 $scope.ok = function () {
-                    this.$rootScope.events.push({
-                        title: 'New $rootScope',
-                        startsAt: moment().startOf('day').toDate(),
-                        endsAt: moment().endOf('day').toDate(),
-                        draggable: true,
-                        resizable: true
+
+                    var event = new eventService({
+                        title: $scope.title,
+                        startsAt: $scope.dtOne,
+                        endsAt: $scope.dtTwo
                     });
 
-                    $uibModalInstance.close($scope.selected.item);
+                    event.$save()
+                        .then(function (res) {
+                            console.log("authenticated");
+                            console.log(res)
+                        })
+                        .catch(function (req) {
+                            console.log("error saving obj");
+                        })
+                        .finally(function () {
+                            console.log("always called");
+                            $uibModalInstance.close();
+
+                        });
 
 
                 };
