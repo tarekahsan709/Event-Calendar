@@ -4,10 +4,9 @@ import mongoose from 'mongoose';
 import {registerEvents} from './event.events';
 
 var EventSchema = new mongoose.Schema({
-  name: String,
-  info: String,
-  start_at: Date,
-  end_at: Date
+    title: String,
+    startsAt: Date,
+    endsAt: Date
 });
 
 registerEvents(EventSchema);

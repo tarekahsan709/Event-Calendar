@@ -25,10 +25,12 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import eventService from './main/event.service';
+
 
 import './app.css';
 
-angular.module('generalCrmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar,
+angular.module('jeeonApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, mwl_calendar, eventService,
   _Auth, navbar, footer, main, constants, socket, util
 ])
   .config(routeConfig)
@@ -47,7 +49,7 @@ angular.module('generalCrmApp', [ngCookies, ngResource, ngSanitize, 'btford.sock
 
 angular.element(document)
   .ready(() => {
-    angular.bootstrap(document, ['generalCrmApp'], {
+    angular.bootstrap(document, ['jeeonApp'], {
       strictDi: true
     });
   });

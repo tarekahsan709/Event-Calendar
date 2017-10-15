@@ -8,15 +8,18 @@ export class MainController {
     moment;
     calendarConfig;
     $uibModal;
+    eventService;
 
     /*@ngInject*/
-    constructor($http, socket, moment, calendarConfig, $uibModal) {
-
+    constructor($http, socket, moment, calendarConfig, $uibModal, eventService) {
         this.$http = $http;
         this.$uibModal = $uibModal;
         this.moment = moment;
         this.calendarConfig = calendarConfig;
         this.socket = socket;
+        this.testEvents = eventService.query();
+        console.log(this.testEvents);
+
     }
 
     $onInit() {
@@ -39,28 +42,18 @@ export class MainController {
         this.events = [
             {
                 title: 'An event',
-                color: this.calendarConfig.colorTypes.warning,
                 startsAt: this.moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
                 endsAt: this.moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-                draggable: true,
-                resizable: true,
                 actions: actions
             }, {
                 title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-                color: this.calendarConfig.colorTypes.info,
                 startsAt: this.moment().subtract(1, 'day').toDate(),
                 endsAt: this.moment().add(5, 'days').toDate(),
-                draggable: true,
-                resizable: true,
                 actions: actions
             }, {
                 title: 'This is a really long event title that occurs on every year',
-                color: this.calendarConfig.colorTypes.important,
                 startsAt: this.moment().startOf('day').add(7, 'hours').toDate(),
                 endsAt: this.moment().startOf('day').add(19, 'hours').toDate(),
-                recursOn: 'year',
-                draggable: true,
-                resizable: true,
                 actions: actions
             }
         ];
@@ -112,8 +105,6 @@ export class MainController {
     };
 
     timespanClicked(date, cell) {
-        alert('timespanClicked');
-
         if (this.calendarView === 'month') {
             if ((this.cellIsOpen && this.moment(date).startOf('day').isSame(this.moment(this.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
                 this.cellIsOpen = false;
@@ -132,13 +123,13 @@ export class MainController {
 
     };
 
-    addNewEvent (size) {
+    addNewEvent(size) {
         var modalInstance = this.$uibModal.open({
             animation: this.animationsEnabled,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'myModalContent.html',
-            controller:['$rootScope','$scope','$uibModalInstance', 'items', 'moment', function ($rootScope, $scope, $uibModalInstance, items, moment) {
+            controller: ['$rootScope', '$scope', '$uibModalInstance', 'items', 'moment', function ($rootScope, $scope, $uibModalInstance, items, moment) {
 
                 $scope.items = items;
 
@@ -146,12 +137,12 @@ export class MainController {
                     item: $scope.items[0]
                 };
 
-                $scope.today = function() {
+                $scope.today = function () {
                     $scope.dt = new Date();
                 };
                 $scope.today();
 
-                $scope.open1 = function() {
+                $scope.open1 = function () {
                     $scope.popup1.opened = true;
                 };
 

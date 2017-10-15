@@ -13,36 +13,30 @@ export default function seedDatabaseIfNeeded() {
         Event.find({}).remove()
             .then(() => {
                 Event.create({
-                    name: 'Development Tools',
-                    info: 'Integration with popular',
-                    start_at: new Date(),
-                    end_at: new Date()
+                    title: 'Development Tools',
+                    startsAt: new Date(),
+                    endsAt: new Date()
                 }, {
-                    name: 'Server and Client integration',
-                    info: 'Built with a powerful and fun stack:',
-                    start_at: new Date(),
-                    end_at: new Date()
+                    title: 'Server and Client integration',
+                    startsAt: new Date(),
+                    endsAt: new Date()
                 }, {
-                    name: 'Smart Build System',
-                    info: 'Build system ignores `spec` files, allowing you to keep ',
-                    start_at: new Date(),
-                    end_at: new Date()
+                    title: 'Smart Build System',
+                    startsAt: new Date(),
+                    endsAt: new Date()
 
                 }, {
-                    name: 'Modular Structure',
-                    info: 'Best practice client and server structures allow for more ',
-                    start_at: new Date(),
-                    end_at: new Date()
+                    title: 'Modular Structure',
+                    startsAt: new Date(),
+                    endsAt: new Date()
                 }, {
-                    name: 'Optimized Build',
-                    info: 'Build process packs up your templates as a single JavaScript ',
-                    start_at: new Date(),
-                    end_at: new Date()
+                    title: 'Optimized Build',
+                    startsAt: new Date(),
+                    endsAt: new Date()
                 }, {
-                    name: 'Deployment Ready',
-                    info: 'Easily deploy your app to Heroku or Openshift with the heroku ',
-                    start_at: new Date(),
-                    end_at: new Date()
+                    title: 'Deployment Ready',
+                    startsAt: new Date(),
+                    endsAt: new Date()
                 });
             })
             .then(() => console.log('finished populating events'))
