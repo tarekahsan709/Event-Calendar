@@ -31,6 +31,7 @@ describe('Event Model', function () {
             .eventually.have.length(0);
     });
 
+    //failing
     it('should fail when saving a duplicate event', function () {
         return expect(event.save()
             .then(function () {
