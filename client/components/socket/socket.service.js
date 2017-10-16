@@ -78,6 +78,6 @@ function Socket(socketFactory) {
   };
 }
 
-export default angular.module('generalCrmApp.socket', [])
+export default angular.module('jeeonApp.socket', [])
   .factory('socket', Socket)
   .name;

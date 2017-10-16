@@ -23,8 +23,6 @@ export class EventController {
         }.bind(this)
     }];
 
-    // dealer.$remove();
-    // this.dealers.splice(this.dealers.indexOf(dealer), 1);
 
     /*@ngInject*/
     constructor($scope, $http, socket, moment, calendarConfig, $uibModal, eventService) {
@@ -36,34 +34,23 @@ export class EventController {
         this.eventService = eventService;
 
         $scope.$on('addEvent', (event, data) => {
-            data.startsAt = new Date(data.startsAt);
-            data.endsAt = new Date(data.endsAt);
-            data.actions = this.actions;
-            this.events.push(data);
+            this.$onInit();
+            // data.startsAt = new Date(data.startsAt);
+            // data.endsAt = new Date(data.endsAt);
+            // data.actions = this.actions;
+            // this.events.push(data);
         });
 
         $scope.$on('editEvent', (event, data) => {
-            this.events = eventService.query();
-            this.events.$promise.then(events => {
-                return events.map(event => {
-                    event.startsAt = new Date(event.startsAt);
-                    event.endsAt = new Date(event.endsAt);
-                    event.actions = this.actions;
-                    return event;
-                });
+            this.$onInit();
 
-            }).catch(function (err) {
-                console.log(err);
-            });
         });
-
 
     }
 
 
     $onInit() {
         this.events = this.eventService.query();
-
         this.events.$promise.then(events => {
             return events.map(event => {
                 event.startsAt = new Date(event.startsAt);
@@ -74,72 +61,34 @@ export class EventController {
 
         }).catch(err => {
             console.log(err);
+        }).finally(() => {
+            this.socket.syncUpdates('event', this.events);
+
         });
 
-        this.items = ['item1', 'item2', 'item3'];
         this.animationsEnabled = true;
         this.calendarView = 'month';
         this.viewDate = new Date();
         this.cellIsOpen = false;
+
     }
 
-    addEvent() {
-        this.$rootScope.events.push({
-            title: 'New event',
-            startsAt: this.moment().startOf('day').toDate(),
-            endsAt: this.moment().endOf('day').toDate(),
-            color: this.calendarConfig.colorTypes.important,
-            draggable: true,
-            resizable: true
-        });
-    };
-
-    eventClicked(event) {
-        alert('eventClicked');
-        alert.show('Clicked', event);
-    };
-
-    eventEdited(event) {
-        alert('eventEdited');
-
-        alert.show('Edited', event);
-    };
-
-    eventDeleted(event) {
-        alert('eventDeleted');
-
-        alert.show('Deleted', event);
-    };
-
-    eventTimesChanged(event) {
-        alert('eventTimesChanged');
-        alert.show('Dropped or resized', event);
-    };
-
-    toggle($event, field, event) {
-        alert('toggle');
-
-        $event.preventDefault();
-        $event.stopPropagation();
-        event[field] = !event[field];
-    };
-
     timespanClicked(date, cell) {
-        if (this.calendarView === 'month') {
-            if ((this.cellIsOpen && this.moment(date).startOf('day').isSame(this.moment(this.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-                this.cellIsOpen = false;
-            } else {
-                this.cellIsOpen = true;
-                this.viewDate = date;
-            }
-        } else if (this.calendarView === 'year') {
-            if ((this.cellIsOpen && this.moment(date).startOf('month').isSame(this.moment(this.viewDate).startOf('month'))) || cell.events.length === 0) {
-                this.cellIsOpen = false;
-            } else {
-                this.cellIsOpen = true;
-                this.viewDate = date;
-            }
-        }
+        // if (this.calendarView === 'month') {
+        //     if ((this.cellIsOpen && this.moment(date).startOf('day').isSame(this.moment(this.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
+        //         this.cellIsOpen = false;
+        //     } else {
+        //         this.cellIsOpen = true;
+        //         this.viewDate = date;
+        //     }
+        // } else if (this.calendarView === 'year') {
+        //     if ((this.cellIsOpen && this.moment(date).startOf('month').isSame(this.moment(this.viewDate).startOf('month'))) || cell.events.length === 0) {
+        //         this.cellIsOpen = false;
+        //     } else {
+        //         this.cellIsOpen = true;
+        //         this.viewDate = date;
+        //     }
+        // }
 
     };
 
@@ -149,7 +98,7 @@ export class EventController {
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'myModalContent.html',
-            controller: ['$rootScope', '$scope', '$uibModalInstance', 'items', 'moment', 'eventService', function ($rootScope, $scope, $uibModalInstance, items, moment, eventService) {
+            controller: ['$rootScope', '$scope', '$uibModalInstance', 'moment', 'eventService', function ($rootScope, $scope, $uibModalInstance, moment, eventService) {
 
                 $scope.event = new eventService();
 
@@ -172,11 +121,12 @@ export class EventController {
 
                     }
                 });
-                $scope.open1 = function () {
+
+                $scope.openAddEventCalenderOne = function () {
                     $scope.popup1.opened = true;
                 };
 
-                $scope.open2 = function () {
+                $scope.openAddEventCalenderTwo = function () {
                     $scope.popup2.opened = true;
                 };
 
@@ -220,15 +170,10 @@ export class EventController {
 
 
             }],
-            size: size,
-            resolve: {
-                items: function () {
-                    return this.items;
-                }.bind(this)
-            }
+            size: size
+
         });
     }
-
 
     editEvent(event) {
 
@@ -265,11 +210,11 @@ export class EventController {
                     }
                 });
 
-                $scope.open1 = function () {
+                $scope.openEditEventCalenderOne = function () {
                     $scope.popup1.opened = true;
                 };
 
-                $scope.open2 = function () {
+                $scope.openEditEventCalenderTwo = function () {
                     $scope.popup2.opened = true;
                 };
 

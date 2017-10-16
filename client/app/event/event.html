@@ -12,30 +12,32 @@
         <div class="">
             <div class="btn-group">
 
-                <button
+                <span
                         class="btn btn-primary"
                         mwl-date-modifier
                         date="$ctrl.viewDate"
                         decrement="$ctrl.calendarView"
                         ng-click="$ctrl.cellIsOpen = false">
                     Previous
-                </button>
-                <button
+                </span>
+
+                <span
                         class="btn btn-default"
                         mwl-date-modifier
                         date="$ctrl.viewDate"
                         set-to-today
                         ng-click="$ctrl.cellIsOpen = false">
                     Today
-                </button>
-                <button
+                </span>
+                <span
                         class="btn btn-primary"
                         mwl-date-modifier
                         date="$ctrl.viewDate"
                         increment="$ctrl.calendarView"
                         ng-click="$ctrl.cellIsOpen = false">
                     Next
-                </button>
+                </span>
+
             </div>
         </div>
     </div>
@@ -118,7 +120,7 @@
                                ng-required="true" close-text="Close"
                                alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            <button type="button" class="btn btn-default" ng-click="openAddEventCalenderOne()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                     </p>
                 </td>
@@ -131,7 +133,7 @@
                                ng-required="true" close-text="Close"
                                alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            <button type="button" class="btn btn-default" ng-click="openAddEventCalenderTwo()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                     </p>
                 </td>
@@ -178,7 +180,7 @@
                                ng-required="true" close-text="Close"
                                alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            <button type="button" class="btn btn-default" ng-click="openEditEventCalenderOne()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                     </p>
                 </td>
@@ -190,7 +192,7 @@
                                ng-required="true" close-text="Close"
                                alt-input-formats="altInputFormats"/>
                           <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            <button type="button" class="btn btn-default" ng-click="openEditEventCalenderTwo()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                     </p>
                 </td>
