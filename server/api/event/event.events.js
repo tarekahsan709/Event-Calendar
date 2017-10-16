@@ -13,9 +13,7 @@ EventEvents.setMaxListeners(0);
 // Model events
 var events = {
     save: 'save',
-    remove: 'remove',
-    new: 'new',
-    update: 'upsert'
+    remove: 'remove'
 };
 
 // Register the event emitter to the model events

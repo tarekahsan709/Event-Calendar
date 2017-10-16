@@ -7,7 +7,7 @@
 import EventEvents from './event.events';
 
 // Model events to emit
-var events = ['save', 'remove', 'new', 'upsert'];
+var events = ['save', 'remove'];
 
 export function register(socket) {
   // Bind model events to socket events
