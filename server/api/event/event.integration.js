@@ -81,8 +81,8 @@ describe('Event API:', function () {
 
         it('should respond with the requested event', function () {
             expect(event.title).to.equal('New Event');
-            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
-            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(event.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(event.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
     });
 
@@ -114,8 +114,6 @@ describe('Event API:', function () {
 
         it('should respond with the updated event', function () {
             expect(updatedEvent.title).to.equal('Updated Event');
-            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
-            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
 
         it('should respond with the updated event on a subsequent GET', function (done) {
@@ -130,8 +128,8 @@ describe('Event API:', function () {
                     let event = res.body;
 
                     expect(event.title).to.equal('Updated Event');
-                    expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
-                    expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+                    expect(new Date(event.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+                    expect(new Date(event.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
 
                     done();
                 });
@@ -166,8 +164,8 @@ describe('Event API:', function () {
 
         it('should respond with the patched event', function () {
             expect(patchedEvent.title).to.equal('Patched Event');
-            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
-            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(patchedEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(patchedEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
     });
 
