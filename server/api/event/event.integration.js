@@ -37,8 +37,8 @@ describe('Event API:', function () {
                 .post('/api/events')
                 .send({
                     title: 'New Event',
-                    startsAt: new Date(),
-                    endsAt: new Date()
+                    startsAt: new Date().setHours(0, 0, 0, 0),
+                    endsAt: new Date().setHours(0, 0, 0, 0)
                 })
                 .expect(201)
                 .expect('Content-Type', /json/)
@@ -52,9 +52,9 @@ describe('Event API:', function () {
         });
 
         it('should respond with the newly created event', function () {
-            expect(newEvent.title).to.equal('New event');
-            expect(newEvent.startsAt).to.equal(new Date());
-            expect(newEvent.endsAt).to.equal(new Date());
+            expect(newEvent.title).to.equal('New Event');
+            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
     });
 
@@ -81,8 +81,8 @@ describe('Event API:', function () {
 
         it('should respond with the requested event', function () {
             expect(event.title).to.equal('New Event');
-            expect(event.startsAt).to.equal(new Date());
-            expect(event.endsAt).to.equal(new Date());
+            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
     });
 
@@ -94,8 +94,8 @@ describe('Event API:', function () {
                 .put(`/api/events/${newEvent._id}`)
                 .send({
                     title: 'Updated Event',
-                    startsAt: new Date(),
-                    endsAt: new Date()
+                    startsAt: new Date().setHours(0, 0, 0, 0),
+                    endsAt: new Date().setHours(0, 0, 0, 0)
                 })
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -114,8 +114,8 @@ describe('Event API:', function () {
 
         it('should respond with the updated event', function () {
             expect(updatedEvent.title).to.equal('Updated Event');
-            expect(updatedEvent.startsAt).to.equal(new Date());
-            expect(updatedEvent.endsAt).to.equal(new Date());
+            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
 
         it('should respond with the updated event on a subsequent GET', function (done) {
@@ -130,8 +130,8 @@ describe('Event API:', function () {
                     let event = res.body;
 
                     expect(event.title).to.equal('Updated Event');
-                    expect(updatedEvent.startsAt).to.equal(new Date());
-                    expect(updatedEvent.endsAt).to.equal(new Date());
+                    expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+                    expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
 
                     done();
                 });
@@ -146,8 +146,8 @@ describe('Event API:', function () {
                 .patch(`/api/events/${newEvent._id}`)
                 .send([
                     {op: 'replace', path: '/title', value: 'Patched Event'},
-                    {op: 'replace', path: '/startsAt', value: new Date()},
-                    {op: 'replace', path: '/endsAt', value: new Date()}
+                    {op: 'replace', path: '/startsAt', value: new Date().setHours(0, 0, 0, 0)},
+                    {op: 'replace', path: '/endsAt', value: new Date().setHours(0, 0, 0, 0)}
                 ])
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -166,8 +166,8 @@ describe('Event API:', function () {
 
         it('should respond with the patched event', function () {
             expect(patchedEvent.title).to.equal('Patched Event');
-            expect(patchedEvent.startsAt).to.equal(new Date());
-            expect(patchedEvent.endsAt).to.equal(new Date());
+            expect(new Date(newEvent.startsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
+            expect(new Date(newEvent.endsAt).setHours(0, 0, 0, 0)).to.equal(new Date().setHours(0, 0, 0, 0));
         });
     });
 
