@@ -9,6 +9,10 @@
 - [Node.js and npm](nodejs.org)
 - [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
+- [node-gyp](https://github.com/nodejs/node-gyp#installation)
+
+
+* You must full fill the Prerequisites to run the application. Please make sure you have install all of them correctly and specially node-gyp.
 
 ### Run
 
@@ -20,8 +24,11 @@
 
 4. Run `gulp serve` to start the development server. It should automatically open the client in your browser when ready.
 
-5. Run `cd node_modules/iltorb && npm i && cd ../.. ` and then `gulp serve`in case you got
-    #### Error: Cannot find module './build/bindings/iltorb.node'
+ In case you face
+  ##### Error: Cannot find module './build/bindings/iltorb.node'
+  please run `cd node_modules/iltorb && npm i && cd ../.. ` and then `gulp serve`in case you got
+
+##### If you still face problem like can not find module node-zopfli please check node-gyp installation link carefully.
 
 ## Build & development
 
