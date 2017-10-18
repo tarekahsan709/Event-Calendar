@@ -16,7 +16,7 @@
 
 ### Run
 
-1. Clone the project from - https://github.com/tarekahsan709/Event-Calendar
+1. Clone the project
 
 2. Run `npm install` to install server dependencies.
 
@@ -43,15 +43,15 @@ Running `test:server` will run the server side test code.
 ## Descriptions
 The project is mainly consist of two part. One is client which hold the frontend code and another is server which hold the backend code. In client AngularJS, Html, Css, Bootstrap, Ui-bootstrap technology is used. Also some other library  like
 for calender view a Angular bootstrap calender , ui-router for routing, ng-resource for interact with RESTful server-side data sources.
-Server side is build on node js platform. Express js , Mongodb, Mongoose technology is used. I have used some es6 feature both client and sever side. For browser support babel is used to. Also gulp and web pack is used as a build tool. For linting eslint is used.
+Server side is build on node js platform. Express js , Mongodb, Mongoose technology is used. I have used some es6 feature both client and sever side. For browser support babel is used to. Also gulp and webpack is used as a build tool. For linting eslint is used.
 Some unit test and integration test is also written for backend using Mocha, Chai and Sinon.
 Each cell of the calender will show only two event name. If it has more then two event , the cell will show the number of event it's containing.
-to see those events you have to click the cell. It will expand and show those events. Event title also show maximum 20 character on cell. It it's more then 20 character it will show as ....
-A seed data is provided, If you don't want to seed data. please false seed config. it's located on server/config/environment/development.js
+to see all events you have to click the cell. It will expand and show those events. Event title also show maximum 20 character on cell. It it's more then 20 character it will show as ....
+A seed data is provided, If you don't want to seed data. please false the seed config. it's located on server/config/environment/development.js
 
 ## Thought process
-After reading the requirement , first I tried to identify possible difficulty I may face to build this project.Then try to solve those difficulty as a general purpose also at the mean time start to build the basic skeleton.
-To build the project a need a good well documented calender library. After searching and reading some of library. I decide which library to feet best and integrate that. After that a design the database and endpoint.
- then test those using postman. Also write some test code for them. when the backend seems to ok to me, I start to work on client side. Starting fetching the api then binding it with the celender. After that test all the functionality and add some style to the client side.
-  When all those finish I try to clone the project in my another pc. To check whether it run smoothly on my pc only or others too. Then confirm that I added the read me.
+After reading the requirement , first I tried to identify possible difficulty I may face to build this project.Then try to solve those difficulty as a general purpose also at the meantime start to build the project basic skeleton.
+To build the project I need a good well documented angular calender library. After searching and reading about some of library. I choose library which feet best and then integrate that. After that a design the database and api endpoint.
+ then test those api using postman. Also write some test code to test them. when the backend seems to ok to me, I start to work on client side. Starting fetching the api then binding it with the celender. After that test all the functionality and add some style to the client side.
+  When all those finish I try to clone the project in my another pc. To check whether it run smoothly on my pc only or others too. Then confirming that I added the read me.
 
