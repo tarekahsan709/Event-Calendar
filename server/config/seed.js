@@ -13,28 +13,28 @@ export default function seedDatabaseIfNeeded() {
         Event.find({}).remove()
             .then(() => {
                 Event.create({
-                    title: 'Development Tools',
+                    title: 'Metor',
                     startsAt: new Date(),
                     endsAt: new Date()
                 }, {
-                    title: 'Server and Client integration',
+                    title: 'Angular',
                     startsAt: new Date(),
                     endsAt: new Date()
                 }, {
-                    title: 'Smart Build System',
+                    title: 'Node',
                     startsAt: new Date(),
                     endsAt: new Date()
 
                 }, {
-                    title: 'Modular Structure',
+                    title: 'Gulp',
                     startsAt: new Date(),
                     endsAt: new Date()
                 }, {
-                    title: 'Optimized Build',
+                    title: 'TypeScript',
                     startsAt: new Date(),
                     endsAt: new Date()
                 }, {
-                    title: 'Deployment Ready',
+                    title: 'Babel',
                     startsAt: new Date(),
                     endsAt: new Date()
                 });
