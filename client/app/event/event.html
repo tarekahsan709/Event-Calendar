@@ -1,68 +1,68 @@
-<div class="container">
-    <div class="row">
-        <h2 class="text-center margin-top-0">{{$ctrl.calendarTitle }}</h2>
-        <div class="">
-            <button
-                    class="btn btn-primary pull-right"
-                    ng-click="$ctrl.addNewEvent()">
-                Add a new event
-            </button>
-        </div>
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--<h2 class="text-center margin-top-0">{{$ctrl.calendarTitle }}</h2>-->
+        <!--<div class="">-->
+            <!--<button-->
+                    <!--class="btn btn-primary pull-right"-->
+                    <!--ng-click="$ctrl.addNewEvent()">-->
+                <!--Add a new event-->
+            <!--</button>-->
+        <!--</div>-->
 
-        <div class="">
-            <div class="btn-group">
+        <!--<div class="">-->
+            <!--<div class="btn-group">-->
 
-                <span
-                        class="btn btn-primary"
-                        mwl-date-modifier
-                        date="$ctrl.viewDate"
-                        decrement="$ctrl.calendarView"
-                        ng-click="$ctrl.cellIsOpen = false">
-                    Previous
-                </span>
+                <!--<span-->
+                        <!--class="btn btn-primary"-->
+                        <!--mwl-date-modifier-->
+                        <!--date="$ctrl.viewDate"-->
+                        <!--decrement="$ctrl.calendarView"-->
+                        <!--ng-click="$ctrl.cellIsOpen = false">-->
+                    <!--Previous-->
+                <!--</span>-->
 
-                <span
-                        class="btn btn-default"
-                        mwl-date-modifier
-                        date="$ctrl.viewDate"
-                        set-to-today
-                        ng-click="$ctrl.cellIsOpen = false">
-                    Today
-                </span>
-                <span
-                        class="btn btn-primary"
-                        mwl-date-modifier
-                        date="$ctrl.viewDate"
-                        increment="$ctrl.calendarView"
-                        ng-click="$ctrl.cellIsOpen = false">
-                    Next
-                </span>
+                <!--<span-->
+                        <!--class="btn btn-default"-->
+                        <!--mwl-date-modifier-->
+                        <!--date="$ctrl.viewDate"-->
+                        <!--set-to-today-->
+                        <!--ng-click="$ctrl.cellIsOpen = false">-->
+                    <!--Today-->
+                <!--</span>-->
+                <!--<span-->
+                        <!--class="btn btn-primary"-->
+                        <!--mwl-date-modifier-->
+                        <!--date="$ctrl.viewDate"-->
+                        <!--increment="$ctrl.calendarView"-->
+                        <!--ng-click="$ctrl.cellIsOpen = false">-->
+                    <!--Next-->
+                <!--</span>-->
 
-            </div>
-        </div>
-    </div>
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
-    <div class="row">
+    <!--<div class="row">-->
 
-        <mwl-calendar
-                events="$ctrl.events"
-                view="$ctrl.calendarView"
-                view-title="$ctrl.calendarTitle"
-                view-date="$ctrl.viewDate"
-                on-event-click="$ctrl.eventClicked(calendarEvent)"
-                on-event-times-changed="$ctrl.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-                cell-is-open="$ctrl.cellIsOpen"
-                day-view-split="30"
-                cell-modifier="$ctrl.modifyCell(calendarCell)"
-                cell-auto-open-disabled="false"
-                on-view-change-click="false"
-                custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
-                on-timespan-click="$ctrl.timespanClicked(calendarDate, calendarCell)">
-        </mwl-calendar>
+        <!--<mwl-calendar-->
+                <!--events="$ctrl.events"-->
+                <!--view="$ctrl.calendarView"-->
+                <!--view-title="$ctrl.calendarTitle"-->
+                <!--view-date="$ctrl.viewDate"-->
+                <!--on-event-click="$ctrl.eventClicked(calendarEvent)"-->
+                <!--on-event-times-changed="$ctrl.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"-->
+                <!--cell-is-open="$ctrl.cellIsOpen"-->
+                <!--day-view-split="30"-->
+                <!--cell-modifier="$ctrl.modifyCell(calendarCell)"-->
+                <!--cell-auto-open-disabled="false"-->
+                <!--on-view-change-click="false"-->
+                <!--custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"-->
+                <!--on-timespan-click="$ctrl.timespanClicked(calendarDate, calendarCell)">-->
+        <!--</mwl-calendar>-->
 
-    </div>
+    <!--</div>-->
 
-</div>
+<!--</div>-->
 
 
 <script id="customMonthCell.html" type="text/ng-template">
@@ -78,18 +78,17 @@
 
         <ul ng-repeat="event in day.events | limitTo : 2" style="padding-left: 2px; margin-bottom: 0px">
 
-            <li  class="label label-primary"><i class="glyphicon glyphicon-plus-sign"></i>  {{event.title | Truncate}}</li>
+            <li class="label label-danger"><i class="glyphicon glyphicon-plus-sign"></i> {{event.title | Truncate}}</li>
+            <!--<p>This is a <span class="label label-danger">{{event.title | Truncate}}</span> label.</p>-->
 
         </ul>
 
         <small ng-show="day.events.length > 1" style="position: absolute; bottom: 10px; left: 5px">
-            There are {{ day.events.length }} events on this day, Click to more
+            {{ day.events.length }} events
         </small>
 
     </div>
 </script>
-
-
 
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
@@ -210,3 +209,68 @@
     </div>
 </script>
 
+
+<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+        <div class="col-md-12">
+            <h2 class="text-center margin-bottom-20 margin-top-20">{{$ctrl.calendarTitle }} </h2>
+        </div>
+        <div class="col-xs-8">
+ <span
+         class="btn btn-primary"
+         mwl-date-modifier
+         date="$ctrl.viewDate"
+         decrement="$ctrl.calendarView"
+         ng-click="$ctrl.cellIsOpen = false">
+                    Previous
+                </span>
+
+                <span
+                        class="btn btn-default"
+                        mwl-date-modifier
+                        date="$ctrl.viewDate"
+                        set-to-today
+                        ng-click="$ctrl.cellIsOpen = false">
+                    Today
+                </span>
+                <span
+                        class="btn btn-primary"
+                        mwl-date-modifier
+                        date="$ctrl.viewDate"
+                        increment="$ctrl.calendarView"
+                        ng-click="$ctrl.cellIsOpen = false">
+                    Next
+                </span>
+        </div>
+                <span class="pull-left">
+                    <div class="btn-group">
+                        <button
+                                class="btn btn-primary pull-right"
+                                ng-click="$ctrl.addNewEvent()">
+                Add a new event
+            </button>
+                    </div>
+                </span>
+    </div>
+    <div class="panel-body">
+        <mwl-calendar
+                events="$ctrl.events"
+                view="$ctrl.calendarView"
+                view-title="$ctrl.calendarTitle"
+                view-date="$ctrl.viewDate"
+                on-event-click="$ctrl.eventClicked(calendarEvent)"
+                on-event-times-changed="$ctrl.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+                cell-is-open="$ctrl.cellIsOpen"
+                day-view-split="30"
+                cell-modifier="$ctrl.modifyCell(calendarCell)"
+                cell-auto-open-disabled="false"
+                on-view-change-click="false"
+                custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
+                on-timespan-click="$ctrl.timespanClicked(calendarDate, calendarCell)">
+        </mwl-calendar>
+
+    </div>
+    <div class="panel-footer">
+
+    </div>
+</div>
