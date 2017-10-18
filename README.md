@@ -48,3 +48,10 @@ Some unit test and integration test is also written for backend using Mocha, Cha
 Each cell of the calender will show only two event name. If it has more then two event , the cell will show the number of event it's containing.
 to see those events you have to click the cell. It will expand and show those events. Event title also show maximum 20 character on cell. It it's more then 20 character it will show as ....
 A seed data is provided, If you don't want to seed data. please false seed config. it's located on server/config/environment/development.js
+
+## Thought process
+After reading the requirement , first I tried to identify possible difficulty I may face to build this project.Then try to solve those difficulty as a general purpose also at the mean time start to build the basic skeleton.
+To build the project a need a good well documented calender library. After searching and reading some of library. I decide which library to feet best and integrate that. After that a design the database and endpoint.
+ then test those using postman. Also write some test code for them. when the backend seems to ok to me, I start to work on client side. Starting fetching the api then binding it with the celender. After that test all the functionality and add some style to the client side.
+  When all those finish I try to clone the project in my another pc. To check whether it run smoothly on my pc only or others too. Then confirm that I added the read me.
+
