@@ -43,10 +43,7 @@ If `gulp build` show this error
     at process._tickDomainCallback (internal/process/next_tick.js:122:9)
 `
 
-please run `npm uninstall gulp-imagemin`
-
-            `npm install gulp-imagemin`
-            then run `gulp build` for building and `gulp serve` for preview.
+please run `npm uninstall gulp-imagemin``npm install gulp-imagemin`  then run `gulp build` for building and `gulp serve` for preview.
 
 
 ## Testing
