@@ -12,11 +12,7 @@ export default function seedDatabaseIfNeeded() {
     if (config.seedDB) {
         Event.find({}).remove()
             .then(() => {
-                Event.create({
-                    title: 'Metor',
-                    startsAt: new Date(),
-                    endsAt: new Date()
-                }, {
+                Event.create( {
                     title: 'Angular',
                     startsAt: new Date(),
                     endsAt: new Date()
@@ -31,10 +27,6 @@ export default function seedDatabaseIfNeeded() {
                     endsAt: new Date()
                 }, {
                     title: 'TypeScript',
-                    startsAt: new Date(),
-                    endsAt: new Date()
-                }, {
-                    title: 'Babel',
                     startsAt: new Date(),
                     endsAt: new Date()
                 });
